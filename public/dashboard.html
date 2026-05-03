@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ShortLink Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Dashboard specific styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-card h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .dashboard-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .dashboard-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+        
+        .btn-dashboard {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .btn-dashboard:hover {
+            transform: translateY(-2px);
+        }
+        
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0fdf4;
+            border-radius: 12px;
+            display: none;
+        }
+        
+        .stats-box {
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        
+        .chip-chart {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            align-items: flex-end;
+        }
+        
+        .chip-bar {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .chip-stack {
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px 8px 4px 4px;
+            transition: height 0.3s;
+            min-height: 30px;
+        }
+        
+        .error-box {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        
+        .loading::after {
+            content: "...";
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: "."; }
+            40% { content: ".."; }
+            60%, 100% { content: "..."; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🔗</span>
+                <span class="logo-text">ShortLink Pro</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="/features.html">Features</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+        <h1 style="text-align: center;">URL Shortener Dashboard</h1>
+        <p style="text-align: center; color: #666;">Create short links and track their performance</p>
+        
+        <div class="dashboard-grid">
+            <!-- Create Link Card -->
+            <div class="dashboard-card">
+                <h2>✨ Create Short Link</h2>
+                <div class="input-group">
+                    <label>Long URL</label>
+                    <input type="url" id="longUrl" class="dashboard-input" placeholder="https://example.com/very/long/url">
+                </div>
+                <div class="input-group">
+                    <label>Custom Code (optional)</label>
+                    <input type="text" id="customCode" class="dashboard-input" placeholder="my-custom-link">
+                </div>
+                <button class="btn-dashboard" onclick="shortenUrl()">🔗 Shorten URL</button>
+                <div id="result" class="result-box"></div>
+                <div id="error" class="error-box"></div>
+                <div id="loading" class="loading">Creating your short link</div>
+            </div>
+
+            <!-- Analytics Card -->
+            <div class="dashboard-card">
+                <h2>📊 Analytics</h2>
+                <div class="input-group">
+                    <label>Short Code</label>
+                    <input type="text" id="statsCode" class="dashboard-input" placeholder="Enter short code">
+                </div>
+                <button class="btn-dashboard" onclick="getStats()" style="background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);">📈 Get Stats</button>
+                <div id="stats" class="stats-box"></div>
+            </div>
+        </div>
+        
+        <!-- All Links Card -->
+        <div class="dashboard-card" style="margin-top: 30px;">
+            <h2>📋 All Your Links</h2>
+            <button class="btn-dashboard" onclick="viewAllLinks()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">View All Links</button>
+        </div>
+    </div>
+
+    <footer class="footer" style="margin-top: 60px;">
+        <div class="footer-container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShortLink Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        async function shortenUrl() {
+            const url = document.getElementById('longUrl').value;
+            const custom = document.getElementById('customCode').value;
+            
+            if (!url) {
+                showError('Please enter a URL');
+                return;
+            }
+            
+            showLoading(true);
+            hideError();
+            hideResult();
+            
+            try {
+                const response = await fetch('/api/shorten', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({url: url, customCode: custom || undefined})
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) throw new Error(data.error);
+                
+                showResult(data.shortUrl, data.code);
+                document.getElementById('statsCode').value = data.code;
+                getStats();
+                
+            } catch(err) {
+                showError(err.message);
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        async function getStats() {
+            const code = document.getElementById('statsCode').value;
+            if (!code) {
+                document.getElementById('stats').innerHTML = '<div style="text-align: center; padding: 40px;">Enter a code to see analytics</div>';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/stats/${code}`);
+                const data = await response.json();
+                
+                if (!response.ok) throw new Error(data.error);
+                
+                let hourlyHtml = '<h4>📊 Clicks Last 24 Hours</h4><div class="chip-chart">';
+                data.hourly.forEach(h => {
+                    const height = Math.max(30, h.count * 20);
+                    hourlyHtml += `
+                        <div class="chip-bar">
+                            <div class="chip-stack" style="height: ${Math.min(height, 150)}px;"></div>
+                            <div style="margin-top: 8px; font-size: 12px;">${h.hour}:00</div>
+                            <div style="font-weight: bold;">${h.count}</div>
+                        </div>
+                    `;
+                });
+                hourlyHtml += '</div>';
+                
+                let referrerHtml = '<h4>🌐 Traffic Sources</h4>';
+                data.referrers.forEach(r => {
+                    referrerHtml += `
+                        <div class="stat-item">
+                            <strong>${r.source}</strong>: ${r.count} clicks
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('stats').innerHTML = `
+                    <div class="stat-item">
+                        <strong>🔗 Short Link:</strong><br>
+                        <a href="http://localhost:3000/${data.code}" target="_blank">http://localhost:3000/${data.code}</a>
+                    </div>
+                    <div class="stat-item">
+                        <strong>🎯 Destination:</strong><br>
+                        <small>${data.longUrl}</small>
+                    </div>
+                    <div class="stat-item">
+                        <strong>👆 Total Clicks:</strong> 
+                        <span style="font-size: 2rem; font-weight: bold;">${data.totalClicks}</span>
+                    </div>
+                    ${hourlyHtml}
+                    ${referrerHtml}
+                `;
+                
+            } catch(err) {
+                document.getElementById('stats').innerHTML = `<div class="error-box" style="display: block;">Error: ${err.message}</div>`;
+            }
+        }
+        
+        function viewAllLinks() {
+            window.open('/all-links', '_blank');
+        }
+        
+        function showResult(shortUrl, code) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                ✅ Success! Your short link:<br>
+                <a href="${shortUrl}" target="_blank">${shortUrl}</a><br>
+                <small>Code: ${code}</small>
+            `;
+            resultDiv.style.display = 'block';
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.innerHTML = `❌ ${message}`;
+            errorDiv.style.display = 'block';
+        }
+        
+        function hideError() {
+            document.getElementById('error').style.display = 'none';
+        }
+        
+        function hideResult() {
+            document.getElementById('result').style.display = 'none';
+        }
+        
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
