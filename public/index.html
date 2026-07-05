@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShortLink Pro ✨ | The Best URL Shortener</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ShortLink Pro ✨ | URL Shortener</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -24,369 +24,105 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <h1 class="hero-title">
-                Shorten Your URLs 
-                <span class="gradient-text">Instantly</span>
-            </h1>
-            <p class="hero-subtitle">
-                Create short, memorable links and track every click with powerful analytics. 
-                Used by 10,000+ happy users worldwide.
-            </p>
-            <div class="hero-buttons">
-                <a href="#shortener-section" class="btn btn-primary">🚀 Get Started Free</a>
-                <a href="/features.html" class="btn btn-secondary">✨ View Features</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-number">10K+</div>
-                    <div class="stat-label">Links Created</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">50K+</div>
-                    <div class="stat-label">Clicks Tracked</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">99.9%</div>
-                    <div class="stat-label">Uptime</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- URL Shortener Section -->
-    <section id="shortener-section" class="shortener-section">
+    <!-- Main Shortener -->
+    <section class="shortener-section">
         <div class="container">
-            <h2 class="section-title">Create Your <span class="gradient-text">Short Link</span></h2>
+            <h1>Shorten Your URLs <span class="gradient-text">Instantly</span></h1>
+            <p class="subtitle">Create short, trackable links in seconds.</p>
+
             <div class="shortener-card">
                 <form id="shorten-form">
                     <div class="form-group">
                         <label for="longUrl">Long URL</label>
-                        <input type="url" id="longUrl" name="longUrl" placeholder="https://example.com/your-long-url" required>
+                        <input
+                            type="url"
+                            id="longUrl"
+                            name="longUrl"
+                            placeholder="https://example.com/your-long-url"
+                            required
+                        />
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="customCode">Custom Code (optional)</label>
-                        <input type="text" id="customCode" name="customCode" placeholder="my-custom-link">
+                        <input
+                            type="text"
+                            id="customCode"
+                            name="customCode"
+                            placeholder="my-custom-link"
+                        />
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-large">🔗 Shorten URL</button>
+
+                    <button type="submit" class="btn btn-primary">🔗 Shorten URL</button>
                 </form>
-                
-                <!-- Result Display -->
+
+                <!-- Result -->
                 <div id="result"></div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <h2 class="section-title">Why Choose <span class="gradient-text">ShortLink Pro?</span></h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Redirects in under 50ms. Your users won't even notice the redirect.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Advanced Analytics</h3>
-                    <p>Track clicks, referrers, locations, and device types.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Custom URLs</h3>
-                    <p>Create branded short links with your own custom codes.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Secure & Private</h3>
-                    <p>Your data stays yours. No third-party tracking.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Global CDN</h3>
-                    <p>Fast redirects from anywhere in the world.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💯</div>
-                    <h3>100% Free</h3>
-                    <p>No hidden fees. No premium tiers. Forever free.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-icon">📝</div>
-                    <h3>Paste Your Long URL</h3>
-                    <p>Enter any long URL you want to shorten</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-icon">✨</div>
-                    <h3>Customize (Optional)</h3>
-                    <p>Choose a custom short code for your link</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-icon">🔗</div>
-                    <h3>Get Your Short Link</h3>
-                    <p>Share your new short link anywhere!</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-icon">📊</div>
-                    <h3>Track Analytics</h3>
-                    <p>See who clicked and when</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Shorten Your First Link?</h2>
-            <p>Join thousands of users who trust ShortLink Pro for their URL shortening needs.</p>
-            <a href="#shortener-section" class="btn btn-primary btn-large">🎯 Start Shortening Now</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="logo">🔗 ShortLink Pro</div>
-                    <p>The most powerful, privacy-focused URL shortener with built-in analytics.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Product</h4>
-                    <a href="/dashboard.html">URL Shortener</a>
-                    <a href="/features.html">Features</a>
-                    <a href="#">Pricing</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <a href="/about.html">About Us</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Contact</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 ShortLink Pro. Built with ❤️ for the internet.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // ==========================================
-        // URL SHORTENER FORM HANDLING
-        // ==========================================
-        document.getElementById('shorten-form').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Stop page refresh
-            
+        document.getElementById('shorten-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
             const longUrl = document.getElementById('longUrl').value.trim();
             const customCode = document.getElementById('customCode').value.trim();
             const resultDiv = document.getElementById('result');
-            
-            // Validate
+
             if (!longUrl) {
                 resultDiv.innerHTML = `
-                    <div class="alert alert-error">
-                        ❌ Please enter a valid URL
-                    </div>
+                    <div class="alert alert-error">❌ Please enter a valid URL</div>
                 `;
                 return;
             }
-            
-            // Show loading
+
             resultDiv.innerHTML = `
-                <div class="alert alert-loading">
-                    ⏳ Creating your short link...
-                </div>
+                <div class="alert alert-loading">⏳ Creating your short link...</div>
             `;
-            
+
             try {
-                const response = await fetch('/api/shorten', {
+                const res = await fetch('/api/shorten', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         longUrl: longUrl,
                         customCode: customCode || undefined
                     })
                 });
-                
-                const data = await response.json();
-                
+
+                const data = await res.json();
+
                 if (data.success) {
-                    // Get the base URL (works for both localhost and Render)
-                    const baseUrl = window.location.origin;
-                    const shortUrl = `${baseUrl}/${data.shortCode}`;
-                    
+                    const base = window.location.origin;
+                    const short = `${base}/${data.shortCode}`;
+
                     resultDiv.innerHTML = `
                         <div class="alert alert-success">
-                            <div style="font-size: 18px; font-weight: bold; margin-bottom: 10px;">✅ Success! Your short link is ready</div>
-                            <div style="margin: 10px 0;">
-                                <strong>Short URL:</strong><br>
-                                <a href="${shortUrl}" target="_blank" style="color: #0066cc; font-size: 18px; word-break: break-all;">${shortUrl}</a>
-                            </div>
-                            <div style="margin: 10px 0;">
-                                <strong>Code:</strong> <code style="background: #f0f0f0; padding: 4px 8px; border-radius: 4px;">${data.shortCode}</code>
-                            </div>
-                            <div style="margin: 10px 0;">
-                                <strong>Destination:</strong><br>
-                                <span style="color: #666; word-break: break-all; font-size: 14px;">${data.longUrl}</span>
-                            </div>
-                            <button onclick="navigator.clipboard.writeText('${shortUrl}')" style="margin-top: 10px; padding: 8px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                                📋 Copy Link
-                            </button>
-                            <button onclick="window.open('${shortUrl}', '_blank')" style="margin-top: 10px; margin-left: 10px; padding: 8px 20px; background: #0066cc; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                                🔗 Test Link
-                            </button>
+                            <strong>✅ Success!</strong><br />
+                            <strong>Short URL:</strong><br />
+                            <a href="${short}" target="_blank">${short}</a><br />
+                            <strong>Code:</strong> <code>${data.shortCode}</code><br /><br />
+                            <button onclick="navigator.clipboard.writeText('${short}')" class="btn btn-sm btn-copy">📋 Copy</button>
+                            <button onclick="window.open('${short}','_blank')" class="btn btn-sm btn-test">🔗 Test</button>
                         </div>
                     `;
-                    
-                    // Clear the form
+
                     document.getElementById('longUrl').value = '';
                     document.getElementById('customCode').value = '';
-                    
                 } else {
                     resultDiv.innerHTML = `
-                        <div class="alert alert-error">
-                            ❌ Error: ${data.error || 'Something went wrong'}
-                        </div>
+                        <div class="alert alert-error">❌ ${data.error || 'Something went wrong'}</div>
                     `;
                 }
-            } catch (error) {
-                console.error('Error:', error);
+            } catch (err) {
                 resultDiv.innerHTML = `
-                    <div class="alert alert-error">
-                        ❌ Network error. Please try again.
-                        <br><small>${error.message}</small>
-                    </div>
+                    <div class="alert alert-error">❌ Network error. Please try again.</div>
                 `;
+                console.error(err);
             }
         });
     </script>
 
-    <style>
-        /* ==========================================
-           ALERT STYLES (Add to your CSS)
-           ========================================== */
-        .shortener-section {
-            padding: 60px 20px;
-            background: #f8f9fa;
-        }
-
-        .shortener-card {
-            max-width: 700px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-            box-sizing: border-box;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #0066cc;
-            box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
-        }
-
-        .alert {
-            margin-top: 20px;
-            padding: 16px 20px;
-            border-radius: 8px;
-            animation: slideDown 0.3s ease;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-
-        .alert-error {
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
-
-        .alert-loading {
-            background: #e2f0fd;
-            border: 1px solid #b8d4f0;
-            color: #004085;
-        }
-
-        .btn-large {
-            padding: 14px 40px;
-            font-size: 18px;
-            width: 100%;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .shortener-card {
-                padding: 20px;
-            }
-            .form-group input {
-                font-size: 14px;
-                padding: 10px 14px;
-            }
-        }
-    </style>
 </body>
 </html>
