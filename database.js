@@ -1,33 +1,60 @@
-const sqlite3 = require('sqlite3');
-const { open } = require('sqlite');
-async function openDb() {
-  return open({
-    filename: './urls.db',
-    driver: sqlite3.Database
-  });
+const { Pool } = require('pg');
+
+let pool = null;
+
+function getPool() {
+  if (!pool) {
+    pool = new Pool({
+      connectionString: process.env.POSTGRES_URL || 'postgresql://localhost:5432/url_shortener',
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+    });
+  }
+  return pool;
 }
+
+async function query(text, params) {
+  const client = await getPool().connect();
+  try {
+    const result = await client.query(text, params);
+    return result;
+  } finally {
+    client.release();
+  }
+}
+
 async function initDb() {
-  const db = await openDb();
-  await db.exec(`
-    CREATE TABLE IF NOT EXISTS urls (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      code TEXT UNIQUE NOT NULL,
-      long_url TEXT NOT NULL,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      clicks INTEGER DEFAULT 0
-    )
-  `);
-  await db.exec(`
-    CREATE TABLE IF NOT EXISTS clicks (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      code TEXT NOT NULL,
-      clicked_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      ip_address TEXT,
-      user_agent TEXT,
-      referrer TEXT
-    )
-  `);
-  console.log('✅ Database ready');
-  return db;
+  try {
+    // Create tables if they don't exist
+    await query(`
+      CREATE TABLE IF NOT EXISTS urls (
+        id SERIAL PRIMARY KEY,
+        code VARCHAR(10) UNIQUE NOT NULL,
+        long_url TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        clicks INTEGER DEFAULT 0
+      )
+    `);
+    
+    await query(`
+      CREATE TABLE IF NOT EXISTS clicks (
+        id SERIAL PRIMARY KEY,
+        code VARCHAR(10) NOT NULL,
+        clicked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        ip_address VARCHAR(45),
+        user_agent TEXT,
+        referrer TEXT
+      )
+    `);
+    
+    console.log('✅ Database ready');
+  } catch (error) {
+    console.error('Database initialization error:', error);
+  }
 }
-module.exports = { openDb, initDb };
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  initDb();
+}
+
+module.exports = { query, initDb, getPool };

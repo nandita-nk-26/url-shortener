@@ -1,182 +1,148 @@
 const express = require('express');
-const { nanoid } = require('nanoid');
-const { initDb } = require('./database');
+const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-let db;
-
-async function generateUniqueCode() {
-  let code;
-  let exists = true;
-  
-  while (exists) {
-    code = nanoid(6);
-    const existing = await db.get('SELECT code FROM urls WHERE code = ?', code);
-    exists = existing !== undefined;
-  }
-  
-  return code;
-}
-
-app.post('/api/shorten', async (req, res) => {
-  try {
-    const { url, customCode } = req.body;
-    
-    if (!url || !url.startsWith('http')) {
-      return res.status(400).json({ error: 'Invalid URL' });
-    }
-    
-    let code = customCode;
-    
-    if (!code) {
-      code = await generateUniqueCode();
+// Database setup
+const dbPath = process.env.DATABASE_PATH || './urls.db';
+const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+        console.error('Error opening database:', err);
     } else {
-      const existing = await db.get('SELECT code FROM urls WHERE code = ?', code);
-      if (existing) {
-        return res.status(400).json({ error: 'Custom code already taken' });
-      }
+        console.log('Connected to SQLite database');
+        // Create table if it doesn't exist
+        db.run(`
+            CREATE TABLE IF NOT EXISTS urls (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                short_code TEXT UNIQUE NOT NULL,
+                long_url TEXT NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                clicks INTEGER DEFAULT 0
+            )
+        `);
+        console.log('Table ready');
     }
+});
+
+// Serve static files
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+});
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
+
+app.get('/features', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'features.html'));
+});
+
+// API: Create short URL
+app.post('/api/shorten', (req, res) => {
+    const { longUrl, customCode } = req.body;
     
-    await db.run(
-      'INSERT INTO urls (code, long_url) VALUES (?, ?)',
-      [code, url]
-    );
+    if (!longUrl) {
+        return res.status(400).json({ error: 'Long URL is required' });
+    }
+
+    const shortCode = customCode || generateShortCode();
     
-    res.json({
-      shortUrl: `http://localhost:${PORT}/${code}`,
-      code: code,
-      longUrl: url
+    // Check if custom code already exists
+    db.get('SELECT * FROM urls WHERE short_code = ?', [shortCode], (err, row) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
+        if (row) {
+            return res.status(400).json({ error: 'Short code already exists' });
+        }
+
+        // Insert new URL
+        db.run('INSERT INTO urls (short_code, long_url) VALUES (?, ?)', 
+            [shortCode, longUrl], 
+            function(err) {
+                if (err) {
+                    return res.status(500).json({ error: 'Failed to create short URL' });
+                }
+                res.json({
+                    success: true,
+                    shortCode: shortCode,
+                    shortUrl: `${req.protocol}://${req.get('host')}/${shortCode}`,
+                    longUrl: longUrl
+                });
+            }
+        );
     });
-    
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
-  }
 });
 
-app.get('/:code', async (req, res) => {
-  try {
-    const { code } = req.params;
+// API: Get stats
+app.get('/api/stats/:code', (req, res) => {
+    const code = req.params.code;
     
-    const urlRecord = await db.get(
-      'SELECT long_url FROM urls WHERE code = ?',
-      code
-    );
-    
-    if (!urlRecord) {
-      return res.status(404).send('Short link not found');
-    }
-    
-    db.run('UPDATE urls SET clicks = clicks + 1 WHERE code = ?', code);
-    
-    const ip = req.ip || req.connection.remoteAddress;
-    const userAgent = req.get('User-Agent');
-    const referrer = req.get('Referer') || 'direct';
-    
-    db.run(
-      'INSERT INTO clicks (code, ip_address, user_agent, referrer) VALUES (?, ?, ?, ?)',
-      [code, ip, userAgent, referrer]
-    ).catch(err => console.error('Click logging error:', err));
-    
-    res.redirect(302, urlRecord.long_url);
-    
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
-  }
-});
-
-app.get('/api/stats/:code', async (req, res) => {
-  try {
-    const { code } = req.params;
-    
-    const urlInfo = await db.get(
-      'SELECT long_url, clicks, created_at FROM urls WHERE code = ?',
-      code
-    );
-    
-    if (!urlInfo) {
-      return res.status(404).json({ error: 'Code not found' });
-    }
-    
-    const referrers = await db.all(
-      `SELECT 
-         CASE 
-           WHEN referrer IS NULL OR referrer = '' THEN 'Direct'
-           ELSE referrer 
-         END as source,
-         COUNT(*) as count
-       FROM clicks 
-       WHERE code = ? 
-       GROUP BY source
-       ORDER BY count DESC
-       LIMIT 5`,
-      code
-    );
-    
-    const hourly = await db.all(
-      `SELECT 
-         strftime('%H', clicked_at) as hour,
-         COUNT(*) as count
-       FROM clicks 
-       WHERE code = ? 
-         AND clicked_at > datetime('now', '-1 day')
-       GROUP BY hour
-       ORDER BY hour`,
-      code
-    );
-    
-    res.json({
-      code,
-      longUrl: urlInfo.long_url,
-      totalClicks: urlInfo.clicks,
-      created_at: urlInfo.created_at,
-      referrers,
-      hourly
+    db.get('SELECT * FROM urls WHERE short_code = ?', [code], (err, row) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
+        if (!row) {
+            return res.status(404).json({ error: 'Short URL not found' });
+        }
+        res.json({
+            shortCode: row.short_code,
+            longUrl: row.long_url,
+            clicks: row.clicks || 0,
+            createdAt: row.created_at
+        });
     });
-    
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error' });
-  }
 });
 
-// ========== NEW FEATURE: VIEW ALL LINKS ==========
-app.get('/all-links', async (req, res) => {
-  try {
-    const links = await db.all('SELECT code, long_url, clicks FROM urls ORDER BY clicks DESC');
+// Redirect: Short URL
+app.get('/:code', (req, res) => {
+    const code = req.params.code;
     
-    let html = '<h1>All Your Short Links</h1><table border="1" cellpadding="10"><tr><th>Code</th><th>URL</th><th>Clicks</th></tr>';
-    
-    for (let link of links) {
-      html += `<tr>
-        <td><a href="http://localhost:3000/${link.code}" target="_blank">${link.code}</a></td>
-        <td>${link.long_url.substring(0, 60)}${link.long_url.length > 60 ? '...' : ''}</td>
-        <td>${link.clicks}</td>
-      </tr>`;
+    // Skip if it's a static file request
+    if (code.includes('.')) {
+        return res.status(404).send('Not found');
     }
-    
-    html += '</table><br><a href="/">← Back to Dashboard</a>';
-    res.send(html);
-    
-  } catch (error) {
-    res.send('Error loading links');
-  }
-});
-// ========== END OF NEW FEATURE ==========
 
-async function start() {
-  db = await initDb();
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-    console.log(`📝 Create short links at http://localhost:${PORT}`);
-    console.log(`📊 View all links at http://localhost:${PORT}/all-links`);
-  });
+    db.get('SELECT long_url FROM urls WHERE short_code = ?', [code], (err, row) => {
+        if (err) {
+            return res.status(500).send('Database error');
+        }
+        if (!row) {
+            return res.status(404).sendFile(path.join(__dirname, 'public', 'index.html'));
+        }
+        
+        // Increment click count
+        db.run('UPDATE urls SET clicks = clicks + 1 WHERE short_code = ?', [code]);
+        
+        // Redirect to the long URL
+        res.redirect(row.long_url);
+    });
+});
+
+// Generate random short code
+function generateShortCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let code = '';
+    for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
 }
 
-start();
+// Start server
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📝 Visit: http://localhost:${PORT}`);
+});
