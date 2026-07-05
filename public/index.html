@@ -3,76 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShortLink Pro ✨ | The Best URL Shortener</title>
+    <title>✨ ShortLink Pro | Creative URL Shortener</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
+
+    <!-- Navigation -->
+    <nav class="navbar glass-effect">
         <div class="nav-container">
             <div class="logo">
-                <span class="logo-icon">🔗</span>
-                <span class="logo-text">ShortLink Pro</span>
+                <span class="logo-icon">🚀</span>
+                <span class="logo-text">ShortLink <span style="color: #6C63FF;">Pro</span></span>
             </div>
             <ul class="nav-menu">
-                <li><a href="/" class="active">Home</a></li>
-                <li><a href="/dashboard.html">Dashboard</a></li>
-                <li><a href="/features.html">Features</a></li>
-                <li><a href="/about.html">About</a></li>
+                <li><a href="/" class="active">✨ Home</a></li>
+                <li><a href="/dashboard.html">📊 Dashboard</a></li>
+                <li><a href="/features.html">⚡ Features</a></li>
+                <li><a href="/about.html">💡 About</a></li>
             </ul>
             <div class="nav-toggle">☰</div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero creative-hero">
         <div class="hero-container">
-            <h1 class="hero-title">
-                Shorten Your URLs 
-                <span class="gradient-text">Instantly</span>
-            </h1>
-            <p class="hero-subtitle">
-                Create short, memorable links and track every click with powerful analytics. 
-                Used by 10,000+ happy users worldwide.
-            </p>
-            <div class="hero-buttons">
-                <a href="#shortener-section" class="btn btn-primary">🚀 Get Started Free</a>
-                <a href="/features.html" class="btn btn-secondary">✨ View Features</a>
+            <div class="hero-content">
+                <span class="badge">🔥 10,000+ Links Created</span>
+                <h1 class="hero-title">
+                    Shorten URLs Like 
+                    <span class="gradient-text">Never Before</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Transform long, ugly links into clean, memorable, and trackable short URLs. 
+                    Share smarter. Track better.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#shortener-section" class="btn btn-primary pulse">🚀 Get Started</a>
+                    <a href="/features.html" class="btn btn-secondary">✨ Explore Features</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Links Created</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Clicks Tracked</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
             </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-number">10K+</div>
-                    <div class="stat-label">Links Created</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">50K+</div>
-                    <div class="stat-label">Clicks Tracked</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">99.9%</div>
-                    <div class="stat-label">Uptime</div>
-                </div>
+            <div class="hero-illustration">
+                <div class="floating-element element1">🔗</div>
+                <div class="floating-element element2">✨</div>
+                <div class="floating-element element3">📊</div>
+                <div class="floating-element element4">🚀</div>
             </div>
         </div>
     </section>
 
-    <!-- URL Shortener Section -->
-    <section id="shortener-section" class="shortener-section">
+    <!-- URL Shortener Section - CREATIVE -->
+    <section id="shortener-section" class="shortener-section creative-shortener">
         <div class="container">
-            <h2 class="section-title">Create Your <span class="gradient-text">Short Link</span></h2>
-            <div class="shortener-card">
+            <div class="section-header">
+                <span class="section-badge">⚡ Instant Shortening</span>
+                <h2 class="section-title">Create Your <span class="gradient-text">Short Link</span></h2>
+                <p class="section-subtitle">Paste your long URL below and get a short link in seconds</p>
+            </div>
+            
+            <div class="shortener-card glass-effect">
                 <form id="shorten-form">
-                    <div class="form-group">
-                        <label for="longUrl">Long URL</label>
-                        <input type="url" id="longUrl" name="longUrl" placeholder="https://example.com/your-long-url" required>
+                    <div class="form-group creative-input">
+                        <label for="longUrl">
+                            <span>📎 Long URL</span>
+                        </label>
+                        <input 
+                            type="url" 
+                            id="longUrl" 
+                            name="longUrl" 
+                            placeholder="https://example.com/your-long-url" 
+                            required
+                            class="creative-input-field"
+                        />
                     </div>
                     
-                    <div class="form-group">
-                        <label for="customCode">Custom Code (optional)</label>
-                        <input type="text" id="customCode" name="customCode" placeholder="my-custom-link">
+                    <div class="form-group creative-input">
+                        <label for="customCode">
+                            <span>✏️ Custom Code (optional)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="customCode" 
+                            name="customCode" 
+                            placeholder="my-custom-link"
+                            class="creative-input-field"
+                        />
                     </div>
                     
-                    <button type="submit" class="btn btn-primary btn-large">🔗 Shorten URL</button>
+                    <button type="submit" class="btn btn-primary btn-large creative-btn">
+                        <span>🔗 Shorten URL</span>
+                        <span class="btn-icon">→</span>
+                    </button>
                 </form>
                 
                 <!-- Result Display -->
@@ -81,37 +117,40 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
+    <!-- Features Grid -->
+    <section class="features creative-features">
         <div class="container">
-            <h2 class="section-title">Why Choose <span class="gradient-text">ShortLink Pro?</span></h2>
+            <div class="section-header">
+                <span class="section-badge">💎 Premium Features</span>
+                <h2 class="section-title">Why <span class="gradient-text">ShortLink Pro?</span></h2>
+            </div>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card glass-effect">
                     <div class="feature-icon">⚡</div>
                     <h3>Lightning Fast</h3>
                     <p>Redirects in under 50ms. Your users won't even notice the redirect.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card glass-effect">
                     <div class="feature-icon">📊</div>
                     <h3>Advanced Analytics</h3>
                     <p>Track clicks, referrers, locations, and device types.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card glass-effect">
                     <div class="feature-icon">🎨</div>
                     <h3>Custom URLs</h3>
                     <p>Create branded short links with your own custom codes.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card glass-effect">
                     <div class="feature-icon">🔒</div>
                     <h3>Secure & Private</h3>
                     <p>Your data stays yours. No third-party tracking.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card glass-effect">
                     <div class="feature-icon">🌍</div>
                     <h3>Global CDN</h3>
                     <p>Fast redirects from anywhere in the world.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card glass-effect">
                     <div class="feature-icon">💯</div>
                     <h3>100% Free</h3>
                     <p>No hidden fees. No premium tiers. Forever free.</p>
@@ -120,98 +159,59 @@
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works">
+    <!-- Creative CTA -->
+    <section class="cta creative-cta">
         <div class="container">
-            <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-icon">📝</div>
-                    <h3>Paste Your Long URL</h3>
-                    <p>Enter any long URL you want to shorten</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-icon">✨</div>
-                    <h3>Customize (Optional)</h3>
-                    <p>Choose a custom short code for your link</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-icon">🔗</div>
-                    <h3>Get Your Short Link</h3>
-                    <p>Share your new short link anywhere!</p>
-                </div>
-                <div class="step-arrow">→</div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-icon">📊</div>
-                    <h3>Track Analytics</h3>
-                    <p>See who clicked and when</p>
-                </div>
+            <div class="cta-content glass-effect">
+                <h2>Ready to <span class="gradient-text">Shorten</span> Your First Link?</h2>
+                <p>Join thousands of users who trust ShortLink Pro for their URL shortening needs.</p>
+                <a href="#shortener-section" class="btn btn-primary btn-large pulse">🎯 Start Now</a>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Shorten Your First Link?</h2>
-            <p>Join thousands of users who trust ShortLink Pro for their URL shortening needs.</p>
-            <a href="#shortener-section" class="btn btn-primary btn-large">🎯 Start Shortening Now</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer creative-footer">
         <div class="footer-container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <div class="logo">🔗 ShortLink Pro</div>
+                    <div class="logo">🚀 ShortLink <span style="color: #6C63FF;">Pro</span></div>
                     <p>The most powerful, privacy-focused URL shortener with built-in analytics.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Product</h4>
-                    <a href="/dashboard.html">URL Shortener</a>
-                    <a href="/features.html">Features</a>
-                    <a href="#">Pricing</a>
+                    <a href="/dashboard.html">📊 Dashboard</a>
+                    <a href="/features.html">⚡ Features</a>
                 </div>
                 <div class="footer-col">
                     <h4>Company</h4>
-                    <a href="/about.html">About Us</a>
-                    <a href="#">Blog</a>
-                    <a href="#">Contact</a>
+                    <a href="/about.html">💡 About</a>
+                    <a href="#">📧 Contact</a>
                 </div>
                 <div class="footer-col">
                     <h4>Legal</h4>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <a href="#">🔒 Privacy</a>
+                    <a href="#">📜 Terms</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 ShortLink Pro. Built with ❤️ for the internet.</p>
+                <p>❤️ Built with love | &copy; 2026 ShortLink Pro</p>
             </div>
         </div>
     </footer>
 
-    <!-- FIXED JAVASCRIPT - This is what was broken -->
+    <!-- ====== JAVASCRIPT ====== -->
     <script>
-        // Wait for page to load
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('shorten-form');
             const resultDiv = document.getElementById('result');
             
             form.addEventListener('submit', async function(e) {
-                e.preventDefault(); // Stop page refresh
+                e.preventDefault();
                 
-                // Get the values
                 const longUrl = document.getElementById('longUrl').value.trim();
                 const customCode = document.getElementById('customCode').value.trim();
                 
-                // Validate
                 if (!longUrl) {
                     resultDiv.innerHTML = `
                         <div class="alert alert-error">
@@ -221,7 +221,6 @@
                     return;
                 }
                 
-                // Show loading
                 resultDiv.innerHTML = `
                     <div class="alert alert-loading">
                         ⏳ Creating your short link...
@@ -231,9 +230,7 @@
                 try {
                     const response = await fetch('/api/shorten', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             longUrl: longUrl,
                             customCode: customCode || undefined
@@ -247,18 +244,22 @@
                         const shortUrl = `${baseUrl}/${data.shortCode}`;
                         
                         resultDiv.innerHTML = `
-                            <div class="alert alert-success">
-                                <strong>✅ Success!</strong><br>
-                                <strong>Short URL:</strong><br>
-                                <a href="${shortUrl}" target="_blank">${shortUrl}</a><br>
-                                <strong>Code:</strong> <code>${data.shortCode}</code>
-                                <br><br>
-                                <button onclick="navigator.clipboard.writeText('${shortUrl}')" class="btn btn-sm btn-copy">📋 Copy</button>
-                                <button onclick="window.open('${shortUrl}','_blank')" class="btn btn-sm btn-test">🔗 Test</button>
+                            <div class="alert alert-success creative-success">
+                                <div class="success-icon">🎉</div>
+                                <strong>Success! Your short link is ready</strong>
+                                <div class="short-url-box">
+                                    <a href="${shortUrl}" target="_blank">${shortUrl}</a>
+                                </div>
+                                <div class="code-box">
+                                    <span>Code: <code>${data.shortCode}</code></span>
+                                </div>
+                                <div class="action-buttons">
+                                    <button onclick="navigator.clipboard.writeText('${shortUrl}')" class="btn btn-sm btn-copy">📋 Copy Link</button>
+                                    <button onclick="window.open('${shortUrl}','_blank')" class="btn btn-sm btn-test">🔗 Test Link</button>
+                                </div>
                             </div>
                         `;
                         
-                        // Clear the form
                         document.getElementById('longUrl').value = '';
                         document.getElementById('customCode').value = '';
                     } else {
@@ -279,5 +280,552 @@
             });
         });
     </script>
+
+    <!-- ====== CREATIVE CSS ====== -->
+    <style>
+        /* Fonts */
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #0f0e17;
+            color: #fffffe;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Glass Effect */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        /* Navigation */
+        .navbar {
+            padding: 20px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 14, 23, 0.8);
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #a7a9be;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #6C63FF;
+        }
+
+        /* Hero */
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .badge {
+            background: rgba(108, 99, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            color: #6C63FF;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6C63FF, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #a7a9be;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6C63FF, #5A52D5);
+            color: white;
+            box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(108, 99, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-large {
+            padding: 16px 40px;
+            font-size: 18px;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 40px;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fffffe;
+        }
+
+        .stat-label {
+            color: #a7a9be;
+            font-size: 14px;
+        }
+
+        /* Floating Elements */
+        .hero-illustration {
+            flex: 1;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .floating-element {
+            font-size: 48px;
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .element1 { top: 10%; left: 20%; animation-delay: 0s; }
+        .element2 { top: 50%; right: 10%; animation-delay: 1s; }
+        .element3 { bottom: 10%; left: 30%; animation-delay: 2s; }
+        .element4 { top: 30%; left: 60%; animation-delay: 0.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Shortener Section */
+        .shortener-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-badge {
+            background: rgba(108, 99, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            color: #6C63FF;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 800;
+            margin: 12px 0;
+        }
+
+        .section-subtitle {
+            color: #a7a9be;
+            font-size: 18px;
+        }
+
+        .shortener-card {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 48px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #a7a9be;
+            font-weight: 600;
+        }
+
+        .creative-input-field {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fffffe;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .creative-input-field:focus {
+            outline: none;
+            border-color: #6C63FF;
+            box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.2);
+        }
+
+        .creative-input-field::placeholder {
+            color: #a7a9be;
+        }
+
+        .creative-btn {
+            width: 100%;
+            justify-content: center;
+            font-size: 18px;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .btn-icon {
+            transition: transform 0.3s;
+        }
+
+        .creative-btn:hover .btn-icon {
+            transform: translateX(4px);
+        }
+
+        /* Features */
+        .features {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            padding: 32px 24px;
+            text-align: center;
+            transition: transform 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: #a7a9be;
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cta-content {
+            padding: 60px 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .cta-content h2 {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .cta-content p {
+            color: #a7a9be;
+            margin-bottom: 32px;
+        }
+
+        /* Alerts */
+        .alert {
+            margin-top: 24px;
+            padding: 20px 24px;
+            border-radius: 12px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alert-success {
+            background: rgba(46, 213, 115, 0.1);
+            border: 1px solid rgba(46, 213, 115, 0.3);
+            color: #2ED573;
+        }
+
+        .alert-error {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: #FF6B6B;
+        }
+
+        .alert-loading {
+            background: rgba(108, 99, 255, 0.1);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+            color: #6C63FF;
+        }
+
+        .creative-success {
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .short-url-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .short-url-box a {
+            color: #6C63FF;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .code-box {
+            margin: 12px 0;
+        }
+
+        .code-box code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .btn-sm {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-copy {
+            background: rgba(46, 213, 115, 0.2);
+            color: #2ED573;
+        }
+
+        .btn-copy:hover {
+            background: rgba(46, 213, 115, 0.3);
+        }
+
+        .btn-test {
+            background: rgba(108, 99, 255, 0.2);
+            color: #6C63FF;
+        }
+
+        .btn-test:hover {
+            background: rgba(108, 99, 255, 0.3);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #a7a9be;
+            text-decoration: none;
+            margin: 8px 0;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: #6C63FF;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 12px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #a7a9be;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            .hero-title {
+                font-size: 36px;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .hero-illustration {
+                display: none;
+            }
+            .shortener-card {
+                padding: 24px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+
 </body>
 </html>
